@@ -216,6 +216,9 @@ var planet_api_key = '?api_key=dfa8215647244cec9ba8855978089349';
 var planetMapsLayer = imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
     url : 'https://tiles.planet.com/v0/mosaics/landsat8_toa_rgb_mosaic/{z}/{x}/{y}.png' + planet_api_key
 }));
+viewer.scene.frameState.creditDisplay.addDefaultCredit(
+    new Cesium.Credit('© Imagery provided by Planet.com', '../images/PlanetMaps.png', 'https://www.planet.com')
+);
 ////////////////////////////////////////////////
 
 ////////////////////////////////////////////////

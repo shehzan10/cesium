@@ -8,22 +8,17 @@
     <meta name="cesium-sandcastle-labels" content="Beginner, Showcases">
     <title>Cesium Demo</title>
     <script type="text/javascript" src="../Sandcastle-header.js"></script>
-    <script type="text/javascript" src="../../../ThirdParty/requirejs-2.1.20/require.js"></script>
-    <script type="text/javascript">
-    require.config({
-        baseUrl : '../../../Source',
-        waitSeconds : 60
-    });
     </script>
 </head>
-<body class="sandcastle-loading" data-sandcastle-bucket="bucket-requirejs.html">
+<body class="sandcastle-loading">
 <style>
     @import url(../templates/bucket.css);
 </style>
 <div id="cesiumContainer" class="fullSize"></div>
 <div id="loadingOverlay"><h1>Loading...</h1></div>
 <div id="toolbar"></div>
-<script id="cesium_sandcastle_script">
+<script type="module" id="cesium_sandcastle_script">
+import * as Cesium from '../../../Source/Cesium.js';
 function startup(Cesium) {
     'use strict';
 //Sandcastle_Begin
@@ -33,8 +28,6 @@ var viewer = new Cesium.Viewer('cesiumContainer');
 }
 if (typeof Cesium !== 'undefined') {
     startup(Cesium);
-} else if (typeof require === 'function') {
-    require(['Cesium'], startup);
 }
 </script>
 </body>

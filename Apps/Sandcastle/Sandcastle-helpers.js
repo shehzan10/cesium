@@ -2,7 +2,8 @@
     'use strict';
 
      window.embedInSandcastleTemplate = function(code, addExtraLine) {
-        return 'function startup(Cesium) {\n' +
+        return 'import * as Cesium from \'../../../Source/Cesium.js\';\n' +
+           'function startup(Cesium) {\n' +
            '    \'use strict\';\n' +
            '//Sandcastle_Begin\n' +
            (addExtraLine ? '\n' : '') +
@@ -12,8 +13,6 @@
            '}\n' +
            'if (typeof Cesium !== \'undefined\') {\n' +
            '    startup(Cesium);\n' +
-           '} else if (typeof require === \'function\') {\n' +
-           '    require([\'Cesium\'], startup);\n' +
            '}\n';
     };
     window.decodeBase64Data = function(base64String, pako) {

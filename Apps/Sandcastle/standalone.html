@@ -8,7 +8,6 @@
     <script type="text/javascript" src="Sandcastle-header.js"></script>
     <script type="text/javascript" src="Sandcastle-client.js"></script>
     <script type="text/javascript" src="ThirdParty/pako.min.js"></script>
-    <script type="text/javascript" src="../../ThirdParty/requirejs-2.1.20/require.js"></script>
     <script type="text/javascript" src="Sandcastle-helpers.js"></script>
     <style>
         .fullSize {
@@ -20,8 +19,8 @@
         }
     </style>
 </head>
-<body class="sandcastle-loading" data-sandcastle-bucket="bucket-requirejs.html">
-<script type="text/javascript">
+<body class="sandcastle-loading">
+<script type="module">
 /*global pako */
 if (window.location.hash.indexOf('#c=') === 0) {
     var base64String = window.location.hash.substr(3);
@@ -32,48 +31,36 @@ if (window.location.hash.indexOf('#c=') === 0) {
     window.sandcastleData = data;
 }
 
-require({
-    baseUrl : '../../../',
-    waitSeconds : 120,
-    packages: [{
-        name: 'CesiumUnminified',
-        location: '../Build/CesiumUnminified',
-        main: 'Cesium'
-    }]
-},[
-    'Source/Cesium'
-], function(
-    Cesium) {
-     'use strict';
-     if (window.Cesium === undefined) {
-        window.Cesium = Cesium;
-     }
+import * as Cesium from '../../Source/Cesium.js';
 
-    var defined = window.Cesium.defined;
-    var code;
+if (window.Cesium === undefined) {
+    window.Cesium = Cesium;
+}
 
-    if (defined(window.sandcastleData)) {
-        var base64String = window.location.hash.substr(3);
-        var data = window.sandcastleData;
-        var html = data.html;
-        code = data.code;
-        var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-        if (isIE11) {
-            html = html.replace('../templates', 'templates');
-        }
+var defined = window.Cesium.defined;
+var code;
 
-        // Add the HTML content
-        var htmlElement = document.createElement('div');
-        htmlElement.innerHTML = html;
-        document.body.appendChild(htmlElement);
-
-        // Add the JavaScript
-        var scriptElement = document.createElement('script');
-        var isFirefox = navigator.userAgent.indexOf('Firefox/') >= 0;
-        document.head.appendChild(scriptElement);
-        scriptElement.innerHTML = window.embedInSandcastleTemplate(code, isFirefox);
+if (defined(window.sandcastleData)) {
+    var base64String = window.location.hash.substr(3);
+    var data = window.sandcastleData;
+    var html = data.html;
+    code = data.code;
+    var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+    if (isIE11) {
+        html = html.replace('../templates', 'templates');
     }
-});
+
+    // Add the HTML content
+    var htmlElement = document.createElement('div');
+    htmlElement.innerHTML = html;
+    document.body.appendChild(htmlElement);
+
+    // Add the JavaScript
+    var scriptElement = document.createElement('script');
+    var isFirefox = navigator.userAgent.indexOf('Firefox/') >= 0;
+    document.head.appendChild(scriptElement);
+    scriptElement.innerHTML = window.embedInSandcastleTemplate(code, isFirefox);
+}
 
 </script>
 </body>
